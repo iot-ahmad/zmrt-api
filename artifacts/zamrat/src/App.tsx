@@ -692,6 +692,8 @@ function Router() {
     <ErrorBoundary resetKey={location}>
       <Switch>
         <Route path="/" component={Home} />
+        <Route path="/index.html" component={Home} />
+        <Route path="/index.htm" component={Home} />
         <Route path="/room/:roomCode" component={RoomPage} />
         <Route component={NotFound} />
       </Switch>

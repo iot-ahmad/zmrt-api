@@ -1,5 +1,6 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { AlertCircle } from 'lucide-react';
+import { Link } from 'wouter';
 
 export default function NotFound() {
   return (
@@ -15,9 +16,9 @@ export default function NotFound() {
           <p className="mt-4 text-sm text-gray-600">
             عذراً، الصفحة التي تبحث عنها غير موجودة. ربما تم نقلها أو حذفها.
           </p>
-          <a href="/" className="mt-6 inline-block text-sm font-bold text-[#d94e72] hover:underline">
-            → العودة إلى الرئيسية
-          </a>
+          <Link href="/" className="mt-6 inline-block text-sm font-bold text-[#d94e72] hover:underline">
+            ← العودة إلى الرئيسية
+          </Link>
         </CardContent>
       </Card>
     </div>
