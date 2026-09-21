@@ -5,6 +5,7 @@
 [build.environment]
   NODE_VERSION = "24"
   PNPM_FLAGS = "--no-frozen-lockfile"
+  VITE_API_BASE_URL = "https://zmrt-api.onrender.com"
 
 [[redirects]]
   from = "/*"
