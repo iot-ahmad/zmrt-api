@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: rooms
+    description: Multiplayer game room operations
 paths:
   /healthz:
     get:
@@ -24,7 +26,173 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /rooms:
+    post:
+      operationId: createRoom
+      tags: [rooms]
+      summary: Create a game room
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateRoomInput"
+      responses:
+        "201":
+          description: Room created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoomView"
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /rooms/{roomCode}:
+    get:
+      operationId: getRoom
+      tags: [rooms]
+      summary: Get the current room state
+      parameters:
+        - $ref: "#/components/parameters/RoomCode"
+        - name: X-Player-Id
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Current room state
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoomView"
+        "404":
+          description: Room not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    post:
+      operationId: joinRoom
+      tags: [rooms]
+      summary: Join a waiting room
+      parameters:
+        - $ref: "#/components/parameters/RoomCode"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/JoinRoomInput"
+      responses:
+        "200":
+          description: Joined room
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoomView"
+        "400":
+          description: Room cannot be joined
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Room not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /rooms/{roomCode}/start:
+    post:
+      operationId: startRoom
+      tags: [rooms]
+      summary: Start a room
+      parameters:
+        - $ref: "#/components/parameters/RoomCode"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoomActionInput"
+      responses:
+        "200":
+          description: Started room
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoomView"
+        "400":
+          description: Room cannot start
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /rooms/{roomCode}/pass:
+    post:
+      operationId: passCard
+      tags: [rooms]
+      summary: Pass one card to the next player
+      parameters:
+        - $ref: "#/components/parameters/RoomCode"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PassCardInput"
+      responses:
+        "200":
+          description: Updated room
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoomView"
+        "400":
+          description: Invalid game action
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /rooms/{roomCode}/zamrat:
+    post:
+      operationId: callZamrat
+      tags: [rooms]
+      summary: Call Zamrat when all cards match
+      parameters:
+        - $ref: "#/components/parameters/RoomCode"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoomActionInput"
+      responses:
+        "200":
+          description: Updated room
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoomView"
+        "400":
+          description: Invalid game action
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 components:
+  parameters:
+    RoomCode:
+      name: roomCode
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: "^[A-Z0-9]{5}$"
   schemas:
     HealthStatus:
       type: object
@@ -33,4 +201,121 @@ components:
           type: string
       required:
         - status
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+    CreateRoomInput:
+      type: object
+      properties:
+        playerName:
+          type: string
+          minLength: 1
+          maxLength: 18
+        maxPlayers:
+          type: integer
+          minimum: 3
+          maximum: 10
+      required:
+        - playerName
+    JoinRoomInput:
+      type: object
+      properties:
+        playerName:
+          type: string
+          minLength: 1
+          maxLength: 18
+      required:
+        - playerName
+    RoomActionInput:
+      type: object
+      properties:
+        playerId:
+          type: string
+          minLength: 1
+      required:
+        - playerId
+    PassCardInput:
+      type: object
+      properties:
+        playerId:
+          type: string
+          minLength: 1
+        cardIndex:
+          type: integer
+          minimum: 0
+      required:
+        - playerId
+        - cardIndex
+    PlayerView:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        avatar:
+          type: string
+        score:
+          type: integer
+        cardCount:
+          type: integer
+        isHost:
+          type: boolean
+        isReady:
+          type: boolean
+      required: [id, name, avatar, score, cardCount, isHost, isReady]
+    RoomView:
+      type: object
+      properties:
+        roomCode:
+          type: string
+        viewerPlayerId:
+          type: string
+        status:
+          type: string
+          enum: [waiting, playing, finished]
+        maxPlayers:
+          type: integer
+        round:
+          type: integer
+        activePlayerId:
+          type: ["string", "null"]
+        winnerId:
+          type: ["string", "null"]
+        players:
+          type: array
+          items:
+            $ref: "#/components/schemas/PlayerView"
+        hand:
+          type: array
+          items:
+            type: string
+        feed:
+          type: array
+          items:
+            type: string
+        canStart:
+          type: boolean
+        canPass:
+          type: boolean
+        canCallZamrat:
+          type: boolean
+      required:
+        - roomCode
+        - viewerPlayerId
+        - status
+        - maxPlayers
+        - round
+        - activePlayerId
+        - winnerId
+        - players
+        - hand
+        - feed
+        - canStart
+        - canPass
+        - canCallZamrat
 

@@ -1,0 +1,1 @@
+- [Zamrat room state](zamrat-room-state.md) — first build uses in-memory rooms and polling; move to shared persistence/realtime before multi-instance production.

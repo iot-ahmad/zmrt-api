@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap');
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-card-border: hsl(var(--card-border));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-popover-border: hsl(var(--popover-border));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-primary-border: var(--primary-border);
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-secondary-border: var(--secondary-border);
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-muted-border: var(--muted-border);
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-accent-border: var(--accent-border);
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-destructive-border: var(--destructive-border);
+  --font-sans: var(--app-font-sans);
+  --font-mono: var(--app-font-mono);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --background: 40 45% 96%;
+  --foreground: 244 28% 18%;
+  --border: 39 24% 84%;
+  --input: 39 24% 84%;
+  --ring: 343 70% 56%;
+  --card: 39 50% 99%;
+  --card-foreground: 244 28% 18%;
+  --card-border: 39 30% 88%;
+  --popover: 39 50% 99%;
+  --popover-foreground: 244 28% 18%;
+  --popover-border: 39 30% 88%;
+  --primary: 343 70% 56%;
+  --primary-foreground: 40 45% 98%;
+  --secondary: 78 64% 48%;
+  --secondary-foreground: 244 28% 18%;
+  --muted: 40 30% 91%;
+  --muted-foreground: 244 13% 45%;
+  --accent: 183 60% 37%;
+  --accent-foreground: 40 45% 98%;
+  --destructive: 7 73% 51%;
+  --destructive-foreground: 40 45% 98%;
+  --app-font-sans: 'Plus Jakarta Sans', sans-serif;
+  --app-font-mono: 'DM Mono', monospace;
+  --radius: 1rem;
+  --primary-border: hsl(343 70% 48%);
+  --secondary-border: hsl(78 64% 40%);
+  --muted-border: hsl(40 24% 83%);
+  --accent-border: hsl(183 60% 29%);
+  --destructive-border: hsl(7 73% 43%);
+  --elevate-1: rgba(50, 37, 47, 0.04);
+  --elevate-2: rgba(50, 37, 47, 0.08);
+}
+
+.dark {
+  --background: 244 28% 13%;
+  --foreground: 40 45% 96%;
+  --border: 244 17% 27%;
+  --input: 244 17% 27%;
+  --ring: 343 70% 65%;
+  --card: 244 24% 17%;
+  --card-foreground: 40 45% 96%;
+  --card-border: 244 17% 27%;
+  --popover: 244 24% 17%;
+  --popover-foreground: 40 45% 96%;
+  --popover-border: 244 17% 27%;
+  --primary: 343 70% 65%;
+  --primary-foreground: 244 28% 13%;
+  --secondary: 78 64% 52%;
+  --secondary-foreground: 244 28% 13%;
+  --muted: 244 20% 24%;
+  --muted-foreground: 40 20% 70%;
+  --accent: 183 60% 48%;
+  --accent-foreground: 244 28% 13%;
+  --destructive: 7 73% 60%;
+  --destructive-foreground: 244 28% 13%;
+  --primary-border: hsl(343 70% 65%);
+  --secondary-border: hsl(78 64% 52%);
+  --muted-border: hsl(244 17% 30%);
+  --accent-border: hsl(183 60% 48%);
+  --destructive-border: hsl(7 73% 60%);
+  --elevate-1: rgba(255, 255, 255, 0.05);
+  --elevate-2: rgba(255, 255, 255, 0.1);
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { background: hsl(var(--background)); }
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    min-width: 320px;
+  }
+  button, input { font: inherit; }
+}
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-7px) rotate(2deg); }
+}
+
+@keyframes pulse-ring {
+  0%, 100% { transform: scale(1); opacity: .9; }
+  50% { transform: scale(1.07); opacity: .5; }
+}
+
+.animate-rise { animation: rise-in .5s cubic-bezier(.2,.8,.2,1) both; }
+.animate-bob { animation: bob 4s ease-in-out infinite; }
+.animate-pulse-ring { animation: pulse-ring 1.8s ease-in-out infinite; }
+
+.zamrat-shell {
+  background:
+    radial-gradient(circle at 8% 10%, hsl(78 64% 48% / .12), transparent 22rem),
+    radial-gradient(circle at 93% 12%, hsl(343 70% 56% / .10), transparent 20rem),
+    hsl(var(--background));
+  min-height: 100dvh;
+}
+
+.zamrat-shell::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .2;
+  background-image: radial-gradient(hsl(244 28% 18% / .12) .7px, transparent .7px);
+  background-size: 7px 7px;
+  z-index: 0;
+}
+
+.display-font { font-family: 'Syne', sans-serif; }
+.mono-font { font-family: 'DM Mono', monospace; }
+
+.fruit-orbit {
+  position: relative;
+  width: min(360px, 78vw);
+  aspect-ratio: 1;
+  margin: 0 auto;
+}
+.fruit-orbit::before, .fruit-orbit::after {
+  content: '';
+  position: absolute;
+  border: 1px dashed hsl(343 70% 56% / .25);
+  border-radius: 999px;
+  inset: 9%;
+  transform: rotate(28deg);
+}
+.fruit-orbit::after { inset: 20%; transform: rotate(-44deg); border-color: hsl(183 60% 37% / .25); }
+.fruit-blob {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  border-radius: 45% 55% 52% 48% / 48% 43% 57% 52%;
+  box-shadow: 0 15px 35px hsl(244 28% 18% / .12), inset -8px -8px 0 hsl(244 28% 18% / .08);
+  color: hsl(244 28% 18%);
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.2rem, 4vw, 1.7rem);
+  font-weight: 800;
+}
+.fruit-blob.one { width: 31%; aspect-ratio: 1; top: 4%; left: 14%; background: hsl(78 64% 52%); transform: rotate(-14deg); }
+.fruit-blob.two { width: 36%; aspect-ratio: 1; top: 21%; right: 1%; background: hsl(343 70% 64%); transform: rotate(14deg); }
+.fruit-blob.three { width: 32%; aspect-ratio: 1; bottom: 4%; right: 18%; background: hsl(36 92% 61%); transform: rotate(-9deg); }
+.fruit-blob.four { width: 27%; aspect-ratio: 1; bottom: 14%; left: 6%; background: hsl(183 60% 55%); transform: rotate(14deg); }
+
+.tactile {
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease, border-color .2s ease;
+}
+.tactile:hover { transform: translateY(-2px); }
+.tactile:active { transform: translateY(1px) scale(.98); }
+
+.game-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid hsl(var(--card-border));
+  border-radius: 1.25rem;
+  background: hsl(var(--card));
+  box-shadow: 0 12px 30px hsl(244 28% 18% / .06);
+}
+.game-card::after {
+  content: '';
+  position: absolute;
+  width: 7rem;
+  height: 7rem;
+  right: -3rem;
+  top: -3rem;
+  border-radius: 999px;
+  background: hsl(78 64% 48% / .12);
+}
+
+.hand-card {
+  min-height: 146px;
+  cursor: pointer;
+  transform-origin: bottom center;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.hand-card:hover { transform: translateY(-8px) rotate(-1deg); }
+.hand-card.selected {
+  transform: translateY(-14px);
+  border-color: hsl(var(--primary));
+  box-shadow: 0 18px 28px hsl(343 70% 56% / .2);
+}
+
+@media (max-width: 640px) {
+  .hand-card { min-height: 120px; }
+}

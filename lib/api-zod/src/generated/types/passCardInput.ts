@@ -6,6 +6,9 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export interface HealthStatus {
-  status: string;
+export interface PassCardInput {
+  /** @minLength 1 */
+  playerId: string;
+  /** @minimum 0 */
+  cardIndex: number;
 }

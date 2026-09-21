@@ -1,6 +1,6 @@
-# [Project name]
+# Zamrat — لعبة غرف الفواكه
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+لعبة فواكه جماعية تتيح للأصدقاء إنشاء غرفة ومشاركة كودها واللعب دون تسجيل دخول.
 
 ## Run & Operate
 
@@ -22,23 +22,33 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/zamrat` — واجهة React/Vite للصفحة الرئيسية، غرفة الانتظار، وحالة اللعب.
+- `artifacts/api-server/src/routes/rooms.ts` — منطق الغرف والجولات والتمرير والنتائج.
+- `lib/api-spec/openapi.yaml` — المصدر الوحيد لعقد API.
+- `lib/api-client-react/src/generated` و`lib/api-zod/src/generated` — الملفات المولدة من العقد.
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- الغرف بدون حسابات: هوية اللاعب تُنشأ عند إنشاء/دخول الغرفة وتُحفظ محليًا للغرفة.
+- حالة الغرف في الذاكرة حاليًا، لتبقى النسخة الأولى سريعة وبلا إعداد قاعدة بيانات؛ النشر طويل الأجل يحتاج مخزنًا مشتركًا.
+- تمرير الأوراق متزامن منطقيًا: كل لاعب يختار ورقة، وبعد اكتمال الاختيارات تُمرر الأوراق إلى اللاعب السابق/التالي دفعة واحدة.
+- الواجهة تستخدم polling لحالة الغرفة بدل WebSocket في النسخة الأولى، مع invalidation بعد كل حركة.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- إنشاء غرفة من الصفحة الرئيسية مع اسم مستعار وعدد لاعبين من 3 إلى 10.
+- الانضمام بكود من 5 أحرف، غرفة انتظار، وبدء الجولة من المضيف.
+- توزيع أوراق الفواكه، اختيار ورقة وتمريرها، ونداء Zamrat مع تسجيل النقاط.
+- واجهة متجاوبة فاتحة مع metadata أساسية لمحركات البحث.
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- الواجهة المطلوبة فاتحة، عصرية، وبدون تسجيل دخول؛ مشاركة الغرفة تكون عبر كود قصير.
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- أوامر بناء Vite المحلية تحتاج `PORT` و`BASE_PATH`؛ workflow يحقنهما تلقائيًا.
+- بعد تعديل `lib/api-spec/openapi.yaml` يجب تشغيل codegen قبل استعمال hooks أو schemas جديدة.
 
 ## Pointers
 

@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "زمرت — لعبة غرف الفواكه"
+description = "لعبة فواكه جماعية سريعة تتيح للأصدقاء إنشاء غرفة ومشاركة كودها واللعب معًا مباشرة دون تسجيل دخول."
+version = "1.0.0"
+id = "artifacts/zamrat"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22571
+
+[services.development]
+run = "pnpm --filter @workspace/zamrat run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/zamrat", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/zamrat/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22571"
+BASE_PATH = "/"
