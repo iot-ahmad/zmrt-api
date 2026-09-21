@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&family=Readex+Pro:wght@400;600;700&family=DM+Mono:wght@400;500&display=swap');
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @plugin "@tailwindcss/typography";
@@ -62,7 +62,7 @@
   --accent-foreground: 40 45% 98%;
   --destructive: 7 73% 51%;
   --destructive-foreground: 40 45% 98%;
-  --app-font-sans: 'Plus Jakarta Sans', sans-serif;
+  --app-font-sans: 'Cairo', 'Tajawal', 'Readex Pro', system-ui, sans-serif;
   --app-font-mono: 'DM Mono', monospace;
   --radius: 1rem;
   --primary-border: hsl(343 70% 48%);
@@ -153,7 +153,7 @@
   z-index: 0;
 }
 
-.display-font { font-family: 'Syne', sans-serif; }
+.display-font { font-family: 'Cairo', 'Tajawal', sans-serif; }
 .mono-font { font-family: 'DM Mono', monospace; }
 
 .fruit-orbit {
