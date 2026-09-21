@@ -9,13 +9,15 @@ export default function NotFound() {
           <div className="flex mb-4 gap-2">
             <AlertCircle className="h-8 w-8 text-red-500" />
             <h1 className="text-2xl font-bold text-gray-900">
-              404 Page Not Found
+              ٤٠٤ — الصفحة غير موجودة
             </h1>
           </div>
-
           <p className="mt-4 text-sm text-gray-600">
-            Did you forget to add the page to the router?
+            عذراً، الصفحة التي تبحث عنها غير موجودة. ربما تم نقلها أو حذفها.
           </p>
+          <a href="/" className="mt-6 inline-block text-sm font-bold text-[#d94e72] hover:underline">
+            → العودة إلى الرئيسية
+          </a>
         </CardContent>
       </Card>
     </div>
