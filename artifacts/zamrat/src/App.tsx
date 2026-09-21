@@ -331,7 +331,16 @@ function RoomPage() {
   const [playerId, setPlayerId] = useState(() => localStorage.getItem(playerStorageKey(roomCode)) || '');
   const [selectedCard, setSelectedCard] = useState<number | null>(null);
   const [actionError, setActionError] = useState('');
-  const roomQuery = useGetRoom(roomCode, { query: { queryKey: getGetRoomQueryKey(roomCode), refetchInterval: 1500 } });
+  const roomQuery = useGetRoom(roomCode, {
+    query: {
+      queryKey: getGetRoomQueryKey(roomCode),
+      enabled: Boolean(playerId),
+      refetchInterval: playerId ? 1500 : false,
+    },
+    request: {
+      headers: playerId ? { 'X-Player-Id': playerId } : undefined,
+    },
+  });
   const startRoom = useStartRoom();
   const passCard = usePassCard();
   const callZamrat = useCallZamrat();
@@ -352,6 +361,7 @@ function RoomPage() {
     try { action(); } catch (error) { setActionError(friendlyError(error)); }
   };
 
+  if (!playerId) return <JoinFromLink roomCode={roomCode} onJoined={(joined) => { setPlayerId(joined.viewerPlayerId); queryClient.setQueryData(getGetRoomQueryKey(roomCode), joined); }} error={actionError} />;
   if (roomQuery.isLoading) return <RoomLoading />;
   if (roomQuery.error && !room) {
     return (
@@ -366,7 +376,6 @@ function RoomPage() {
     );
   }
   if (!room) return <RoomLoading />;
-  if (!playerId) return <JoinFromLink roomCode={roomCode} maxPlayers={room.maxPlayers} onJoined={(joined) => { setPlayerId(joined.viewerPlayerId); queryClient.setQueryData(getGetRoomQueryKey(roomCode), joined); }} error={actionError} />;
 
   const viewerId = playerId || room.viewerPlayerId;
   const viewer = room.players.find((player) => player.id === viewerId);

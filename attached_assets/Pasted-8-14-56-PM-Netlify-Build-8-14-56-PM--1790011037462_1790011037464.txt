@@ -1,0 +1,64 @@
+8:14:56 PM: Netlify Build                                                 
+8:14:56 PM: ────────────────────────────────────────────────────────────────
+8:14:56 PM: ​
+8:14:56 PM: ❯ Version
+8:14:56 PM:   @netlify/build 37.0.0
+8:14:56 PM: ​
+8:14:56 PM: ❯ Flags
+8:14:56 PM:   accountId: 6a3f154db2b3488421db3edc
+8:14:56 PM:   baseRelDir: true
+8:14:56 PM:   buildId: 6ab166017ebc9d144cb44592
+8:14:56 PM:   deployId: 6ab166017ebc9d144cb44594
+8:14:56 PM: ​
+8:14:56 PM: ❯ Current directory
+8:14:56 PM:   /opt/build/repo
+8:14:56 PM: ​
+8:14:56 PM: ❯ Config file
+8:14:56 PM:   /opt/build/repo/netlify.toml
+8:14:56 PM: ​
+8:14:56 PM: ❯ Context
+8:14:56 PM:   production
+8:14:56 PM: ​
+8:14:56 PM: build.command from netlify.toml                               
+8:14:56 PM: ────────────────────────────────────────────────────────────────
+8:14:56 PM: ​
+8:14:56 PM: $ pnpm --filter @workspace/zamrat... run build
+8:14:57 PM: Failed during stage 'building site': Build script returned non-zero exit code: 2 (https://ntl.fyi/exit-code-2)
+8:14:57 PM: Scope: 2 of 9 workspace projects
+8:14:57 PM: artifacts/zamrat build$ vite build --config vite.config.ts
+8:14:57 PM: artifacts/zamrat build: failed to load config from /opt/build/repo/artifacts/zamrat/vite.config.ts
+8:14:57 PM: artifacts/zamrat build: error during build:
+8:14:57 PM: artifacts/zamrat build: Error: PORT environment variable is required but was not provided.
+8:14:57 PM: artifacts/zamrat build:     at file:///opt/build/repo/artifacts/zamrat/node_modules/.vite-temp/vite.config.ts.timestamp-1790010897207-1c346f4ea1685.mjs:10:9
+8:14:57 PM: artifacts/zamrat build:     at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+8:14:57 PM: artifacts/zamrat build:     at async node:internal/modules/esm/loader:647:26
+8:14:57 PM: artifacts/zamrat build:     at async loadConfigFromBundledFile (file:///opt/build/repo/node_modules/.pnpm/vite@7.3.6_@types+node@25.9.6_jiti@2.7.0_lightningcss@1.32.0_tsx@4.23.13_yaml@2.9.0/node_modules/vite/dist/node/chunks/config.js:35996:12)
+8:14:57 PM: artifacts/zamrat build:     at async bundleAndLoadConfigFile (file:///opt/build/repo/node_modules/.pnpm/vite@7.3.6_@types+node@25.9.6_jiti@2.7.0_lightningcss@1.32.0_tsx@4.23.13_yaml@2.9.0/node_modules/vite/dist/node/chunks/config.js:35884:17)
+8:14:57 PM: artifacts/zamrat build:     at async loadConfigFromFile (file:///opt/build/repo/node_modules/.pnpm/vite@7.3.6_@types+node@25.9.6_jiti@2.7.0_lightningcss@1.32.0_tsx@4.23.13_yaml@2.9.0/node_modules/vite/dist/node/chunks/config.js:35851:42)
+8:14:57 PM: artifacts/zamrat build:     at async resolveConfig (file:///opt/build/repo/node_modules/.pnpm/vite@7.3.6_@types+node@25.9.6_jiti@2.7.0_lightningcss@1.32.0_tsx@4.23.13_yaml@2.9.0/node_modules/vite/dist/node/chunks/config.js:35500:22)
+8:14:57 PM: artifacts/zamrat build:     at async createBuilder (file:///opt/build/repo/node_modules/.pnpm/vite@7.3.6_@types+node@25.9.6_jiti@2.7.0_lightningcss@1.32.0_tsx@4.23.13_yaml@2.9.0/node_modules/vite/dist/node/chunks/config.js:33955:19)
+8:14:57 PM: artifacts/zamrat build:     at async CAC.<anonymous> (file:///opt/build/repo/node_modules/.pnpm/vite@7.3.6_@types+node@25.9.6_jiti@2.7.0_lightningcss@1.32.0_tsx@4.23.13_yaml@2.9.0/node_modules/vite/dist/node/cli.js:629:10)
+8:14:57 PM: artifacts/zamrat build: Failed
+8:14:57 PM: /opt/build/repo/artifacts/zamrat:
+8:14:57 PM:  ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workspace/zamrat@0.0.0 build: `vite build --config vite.config.ts`
+8:14:57 PM: Exit status 1
+8:14:57 PM: ​
+8:14:57 PM: "build.command" failed                                        
+8:14:57 PM: ────────────────────────────────────────────────────────────────
+8:14:57 PM: ​
+8:14:57 PM:   Error message
+8:14:57 PM:   Command failed with exit code 1: pnpm --filter @workspace/zamrat... run build (https://ntl.fyi/exit-code-1)
+8:14:57 PM: ​
+8:14:57 PM:   Error location
+8:14:57 PM:   In build.command from netlify.toml:
+8:14:57 PM:   pnpm --filter @workspace/zamrat... run build
+8:14:57 PM: ​
+8:14:57 PM:   Resolved config
+8:14:57 PM:   build:
+8:14:57 PM:     command: pnpm --filter @workspace/zamrat... run build
+8:14:57 PM:     commandOrigin: config
+8:14:57 PM:     publish: /opt/build/repo/artifacts/zamrat/dist
+8:14:57 PM:     publishOrigin: config
+8:14:57 PM: Build failed due to a user error: Build script returned non-zero exit code: 2
+8:14:57 PM: Failing build: Failed to build site
+8:14:58 PM: Finished processing build request in 13.833s

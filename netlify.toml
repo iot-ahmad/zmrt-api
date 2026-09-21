@@ -1,0 +1,6 @@
+[build]
+  command = "pnpm --filter @workspace/zamrat... run build"
+  publish = "artifacts/zamrat/dist/public"
+
+[build.environment]
+  NODE_VERSION = "24"
